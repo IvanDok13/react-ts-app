@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "sourceMap": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": false,
+
+    /* Paths */
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@assets/*": ["src/assets/*"],
+      "@styles/*": ["src/styles/*"],
+      "@contexts/*": ["src/contexts/*"],
+      "@commercetool/*": ["src/commercetool/*"],
+      "@utils/*": ["src/utils/*"],
+      "@router/*": ["src/router/*"],
+      "@pages/*": ["src/pages/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@api/*": ["src/api/*"]
+    }
+  },
+  "include": [
+    "src",
+    "declaration.d.ts",
+    "global.d.ts",
+    "./dts-bundle-generator.config.ts",
+    "ct-config.ts",
+    "vitest.config.ts"
+  ]
+}
