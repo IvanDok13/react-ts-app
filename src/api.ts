@@ -16,28 +16,19 @@ interface PokemonListResponse {
   results: Pokemon[];
 }
 
-export const fetchPokemonList = async (query: string, limit: number = 20): Promise<Pokemon[]> => {
-  const savedQuery = localStorage.getItem('pokemonSearchQuery') || '';
-  const effectiveQuery = query || savedQuery;
-
-  const useFullList = !effectiveQuery;
-
-  const fullLimit = 20;
-  const fetchLimit = useFullList ? fullLimit : limit;
+export const fetchPokemonList = async (query: string = ''): Promise<Pokemon[]> => {
+  const limit = 1300;
+  const offset = query ? 0 : Math.floor(Math.random() * 1000);
 
   const response = await axios.get<PokemonListResponse>(
-    `https://pokeapi.co/api/v2/pokemon?limit=${fetchLimit}&offset=0`
+    `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
   );
   const results = response.data.results;
 
-  if (query) {
-    localStorage.setItem('pokemonSearchQuery', query);
-  }
-
-  if (!effectiveQuery) return results;
-
-  return results.filter(p => p.name.toLowerCase().includes(effectiveQuery.toLowerCase()));
+  return query ? results.filter(p => p.name.toLowerCase().includes(query.toLowerCase())) : results;
 };
 
-export const fetchPokemonFull = (url: string): Promise<PokemonFull> =>
-  axios.get<PokemonFull>(url).then(response => response.data);
+export const fetchPokemonFull = async (url: string): Promise<PokemonFull> => {
+  const response = await axios.get<PokemonFull>(url);
+  return response.data;
+};
