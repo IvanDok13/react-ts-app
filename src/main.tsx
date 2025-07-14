@@ -1,7 +1,8 @@
-import { AppRouter } from '@router/router';
+import { ErrorBoundary } from '@components/error-boundary';
 import '@styles/styles.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { App } from './app';
 
 document.body.innerHTML = '<div id="app"></div>';
 
@@ -12,6 +13,8 @@ if (!(root instanceof HTMLElement)) {
 
 createRoot(document.querySelector('#app')!).render(
   <StrictMode>
-    <AppRouter />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </StrictMode>
 );
