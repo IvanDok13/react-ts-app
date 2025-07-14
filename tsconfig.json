@@ -31,7 +31,6 @@
       "@assets/*": ["src/assets/*"],
       "@styles/*": ["src/styles/*"],
       "@contexts/*": ["src/contexts/*"],
-      "@commercetool/*": ["src/commercetool/*"],
       "@utils/*": ["src/utils/*"],
       "@router/*": ["src/router/*"],
       "@pages/*": ["src/pages/*"],
