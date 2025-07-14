@@ -11,8 +11,8 @@ interface State {
 export class SearchBar extends Component<Props, State> {
   public state = { term: '' };
 
-  public handleChange = (event_: ChangeEvent<HTMLInputElement>): void => {
-    this.setState({ term: event_.currentTarget.value });
+  public handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    this.setState({ term: event.currentTarget.value });
   };
 
   public handleClick = (): void => {
