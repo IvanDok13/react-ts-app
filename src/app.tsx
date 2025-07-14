@@ -24,18 +24,17 @@ export class App extends Component<{}, State> {
     const lastTerm = localStorage.getItem('lastSearchTerm');
     if (lastTerm) {
       this.handleSearch(lastTerm);
+    } else {
+      this.handleSearch('');
     }
   }
 
   public handleSearch = (term: string): void => {
     const trimmed = term.trim();
 
-    if (trimmed === '') {
-      console.warn('Try again with a valid term');
-      return;
+    if (trimmed !== '') {
+      localStorage.setItem('lastSearchTerm', trimmed);
     }
-
-    localStorage.setItem('lastSearchTerm', trimmed);
 
     this.setState({ loading: true, error: null, items: [] });
 
