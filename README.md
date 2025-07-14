@@ -1,2 +1,3 @@
 # starwars-app
-Here my Star Wars app with React, TS
+
+Here my React app with React, TS
