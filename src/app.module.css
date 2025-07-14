@@ -10,16 +10,15 @@
 
 .button {
   color: #474242;
-  padding: 5px 5px;
+  padding: 5px;
   margin: 5px;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
   border: 1px solid #2a0f0f;
 }
 
 .errorButton {
-  background-color: #ff0000;
+  background-color: #f00;
 }
 
 .pokemon-list {
