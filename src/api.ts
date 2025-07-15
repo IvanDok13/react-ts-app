@@ -21,9 +21,9 @@ export const fetchPokemonList = async (query: string = ''): Promise<Pokemon[]> =
   const offset = query ? 0 : Math.floor(Math.random() * 1000);
 
   const response = await axios.get<PokemonListResponse>(
-    `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
+    `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
   );
-  const results = response.data.results;
+  const { results } = response.data;
 
   return query ? results.filter(p => p.name.toLowerCase().includes(query.toLowerCase())) : results;
 };
