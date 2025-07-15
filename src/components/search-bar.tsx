@@ -9,22 +9,29 @@ interface State {
 }
 
 export class SearchBar extends Component<Props, State> {
-  public state = { term: '' };
+  constructor(props: Props) {
+    super(props);
+    this.state = { term: '' };
+  }
 
   public handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     this.setState({ term: event.currentTarget.value });
   };
 
   public handleClick = (): void => {
-    const trimmed = this.state.term.trim();
-    this.props.onSearch(trimmed);
+    const { term } = this.state;
+    const trimmed = term.trim();
+    const { props } = this;
+    props.onSearch(trimmed);
   };
 
   public render(): ReactNode {
+    const { term } = this.state;
+
     return (
       <div>
-        <input value={this.state.term} onChange={this.handleChange} placeholder="Pokemon name" />
-        <button className="button" onClick={this.handleClick}>
+        <input value={term} onChange={this.handleChange} placeholder="Pokemon name" />
+        <button className="button" onClick={this.handleClick} type="button">
           Go!
         </button>
       </div>
