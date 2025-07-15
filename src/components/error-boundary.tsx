@@ -9,7 +9,10 @@ interface State {
 }
 
 export class ErrorBoundary extends Component<Props, State> {
-  public state = { hasError: false };
+  constructor(props: Props) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
   public static getDerivedStateFromError(): Partial<State> {
     return { hasError: true };
@@ -21,6 +24,8 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   public render(): ReactNode {
-    return this.state.hasError ? <div>Something went wrong. Please try again.</div> : this.props.children;
+    const { hasError } = this.state;
+    const { children } = this.props;
+    return hasError ? <div>Error. Please reload</div> : children;
   }
 }
