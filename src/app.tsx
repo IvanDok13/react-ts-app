@@ -13,12 +13,15 @@ interface State {
   error: string | null;
 }
 
-export class App extends Component<{}, State> {
-  public state: State = {
-    items: [],
-    loading: false,
-    error: null,
-  };
+export class App extends Component<Record<string, never>, State> {
+  constructor(props: Record<string, never>) {
+    super(props);
+    this.state = {
+      items: [],
+      loading: false,
+      error: null,
+    };
+  }
 
   public componentDidMount(): void {
     const lastTerm = localStorage.getItem('lastSearchTerm');
