@@ -28,7 +28,7 @@ export class ErrorButton extends Component<unknown, State> {
           this.setState({ hasError: true });
         }}
       >
-        Error button
+        Get Error
       </button>
     );
   }
