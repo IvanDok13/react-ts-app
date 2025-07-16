@@ -59,8 +59,8 @@ export class App extends Component<Record<string, never>, State> {
     return (
       <div className={styles.container}>
         <h1 className={styles.title}>PokéFinder</h1>
-        <ErrorButton />
         <SearchBar onSearch={this.handleSearch} />
+        <ErrorButton />
         <PokemonList items={items} loading={loading} error={error} />
       </div>
     );
