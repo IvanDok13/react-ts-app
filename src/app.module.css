@@ -19,12 +19,17 @@
 
 .errorButton {
   background-color: #f00;
+  position: sticky;
+  left: 1110px;
+  top: 600px;
+  display: flex;
 }
 
 .pokemon-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .pokemon-card {
