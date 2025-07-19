@@ -11,7 +11,8 @@ interface State {
 export class SearchBar extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { term: '' };
+    const saved = localStorage.getItem('searchTerm') || '';
+    this.state = { term: saved };
   }
 
   public handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -23,6 +24,7 @@ export class SearchBar extends Component<Props, State> {
     const trimmed = term.trim();
     const { props } = this;
     props.onSearch(trimmed);
+    localStorage.setItem('searchTerm', trimmed);
   };
 
   public render(): ReactNode {
