@@ -1,15 +1,37 @@
-import tsconfigPaths from "vite-tsconfig-paths";
-import { defineConfig } from 'vitest/config';
+/// <reference types="vitest" />
+import path from 'path';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [tsconfigPaths()],
   test: {
-    globals: true,
     environment: 'jsdom',
-    setupFiles: './src/jest/setup.ts',
+    globals: true,
+    setupFiles: './src/setupTests.ts',
     coverage: {
       provider: 'v8',
-      exclude: ['**/dev.js', '**/prod.js', '**/paths.js', '**/postcss.config.js', '**/.eslintrc.cjs' ]
+      reporter: ['text', 'json', 'html'],
+      include: ['src/**/*.{js,jsx,ts,tsx}'],
+      exclude: [
+        'src/**/*.test.{js,jsx,ts,tsx}',
+        'src/**/*.spec.{js,jsx,ts,tsx}',
+        'src/main.{js,jsx,ts,tsx}',
+        'src/index.{js,jsx,ts,tsx}',
+        'src/setupTests.{js,ts}',
+        'src/**/*.d.ts',
+      ],
+      thresholds: {
+        global: {
+          statements: 80,
+          branches: 50,
+          functions: 50,
+          lines: 50,
+        },
+      },
+    },
+  },
+  resolve: {
+    alias: {
+      '@components': path.resolve(__dirname, './src/components'),
     },
   },
 });
