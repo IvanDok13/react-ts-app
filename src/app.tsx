@@ -24,7 +24,7 @@ export class App extends Component<Record<string, never>, State> {
   }
 
   public componentDidMount(): void {
-    const lastTerm = localStorage.getItem('lastSearchTerm');
+    const lastTerm = localStorage.getItem('searchTerm');
     if (lastTerm) {
       this.handleSearch(lastTerm);
     } else {
@@ -34,10 +34,6 @@ export class App extends Component<Record<string, never>, State> {
 
   public handleSearch = (term: string): void => {
     const trimmed = term.trim();
-
-    if (trimmed !== '') {
-      localStorage.setItem('lastSearchTerm', trimmed);
-    }
 
     this.setState({ loading: true, error: null, items: [] });
 
