@@ -3,6 +3,7 @@
   "plugins": ["stylelint-order", "stylelint-scss"],
   "stylelint.validate": ["css", "scss"],
   "rules": {
+    "scss/load-partial-extension": "always",
     "selector-class-pattern": null,
     "font-family-no-duplicate-names": [
       true,
@@ -11,7 +12,6 @@
       }
     ],
     "no-descending-specificity": null,
-    "scss/at-import-partial-extension": "always",
     "custom-property-empty-line-before": "never",
     "declaration-empty-line-before": "never",
     "media-feature-range-notation": "prefix",
