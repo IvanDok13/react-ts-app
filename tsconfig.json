@@ -44,6 +44,8 @@
     "global.d.ts",
     "./dts-bundle-generator.config.ts",
     "ct-config.ts",
-    "vitest.config.ts"
+    "vitest.config.ts",
+    "src/**/*",
+    "commitlint.config.js"
   ]
 }
