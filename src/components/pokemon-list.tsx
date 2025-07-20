@@ -11,6 +11,8 @@ interface Props {
 export function PokemonList({ loading, error, items }: Props): ReactNode {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+  if (!loading && !error && items.length === 0) return <div>No results</div>;
+
   return (
     <main className="pokemon-list">
       {items.map(p => (
