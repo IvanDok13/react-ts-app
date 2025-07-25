@@ -4,10 +4,12 @@ import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 // Mock axios
 vi.mock('axios');
+vi.spyOn(console, 'error').mockImplementation(() => {});
 const mockedAxios = axios as unknown as { get: Mock };
 
 describe('API Integration Tests', () => {
   beforeEach(() => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
     vi.resetAllMocks();
   });
 
@@ -43,9 +45,11 @@ describe('API Integration Tests', () => {
     });
 
     it('throws error when fetchPokemonList fails', async () => {
+      const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       mockedAxios.get.mockRejectedValueOnce(new Error('Network Error'));
 
       await expect(fetchPokemonList()).rejects.toThrow('Network Error');
+      expect(errorSpy).toHaveBeenCalledWith('Error fetching Pokémon list:', expect.any(Error));
     });
   });
 
@@ -66,9 +70,11 @@ describe('API Integration Tests', () => {
     });
 
     it('throws error when fetchPokemonFull fails', async () => {
+      const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       mockedAxios.get.mockRejectedValueOnce(new Error('API Error'));
 
       await expect(fetchPokemonFull('invalid_url')).rejects.toThrow('API Error');
+      expect(errorSpy).toHaveBeenCalledWith('Error fetching full Pokémon data:', expect.any(Error));
     });
   });
 });
