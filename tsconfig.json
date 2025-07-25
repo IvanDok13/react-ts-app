@@ -29,14 +29,11 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"],
       "@styles/*": ["src/styles/*"],
-      "@contexts/*": ["src/contexts/*"],
       "@utils/*": ["src/utils/*"],
-      "@router/*": ["src/router/*"],
-      "@pages/*": ["src/pages/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@api/*": ["src/api/*"]
+      "@api/*": ["src/api/*"],
+      "@const/*": ["src/const/*"],
+      "@interfaces/*": ["src/interfaces/*"]
     }
   },
   "include": [
@@ -45,7 +42,6 @@
     "global.d.ts",
     "./dts-bundle-generator.config.ts",
     "ct-config.ts",
-    "vitest.config.ts",
     "src/**/*",
     "commitlint.config.js"
   ]
