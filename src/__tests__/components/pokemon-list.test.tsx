@@ -1,7 +1,7 @@
 import { PokemonList } from '@components/pokemon-list';
+import type { PokemonFull } from '@interfaces/interface';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import type { PokemonFull } from '../../api';
 
 const mockPokemon: PokemonFull = {
   id: 1,

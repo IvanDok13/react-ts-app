@@ -1,7 +1,7 @@
 import { PokemonCard } from '@components/pokemon-card';
+import type { PokemonFull } from '@interfaces/interface';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import type { PokemonFull } from '../../api';
 
 describe('PokemonCard component', () => {
   const mock: PokemonFull = {
