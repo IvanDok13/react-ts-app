@@ -1,7 +1,6 @@
-import type { FC } from 'react';
 import type { PokemonFull } from '../api';
 
-export const PokemonCard: FC<{ pokemon: PokemonFull }> = function PokemonList({ pokemon }) {
+export function PokemonCard({ pokemon }: { pokemon: PokemonFull }) {
   return (
     <div className="pokemon-card">
       <h4>{pokemon.name}</h4>
@@ -9,4 +8,4 @@ export const PokemonCard: FC<{ pokemon: PokemonFull }> = function PokemonList({ 
       <p>Type: {pokemon.types?.map(t => t.type.name).join(', ') || 'Unknown'}</p>
     </div>
   );
-};
+}
