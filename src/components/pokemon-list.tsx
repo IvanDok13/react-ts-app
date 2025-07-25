@@ -1,5 +1,5 @@
+import type { PokemonFull } from '@interfaces/interface';
 import type { ReactNode } from 'react';
-import type { PokemonFull } from '../api';
 import { LoadingIndicator } from './loader/loading-indicator';
 import { PokemonCard } from './pokemon-card';
 

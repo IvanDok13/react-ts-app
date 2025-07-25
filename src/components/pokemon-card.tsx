@@ -1,4 +1,4 @@
-import type { PokemonFull } from '../api';
+import type { PokemonFull } from '@interfaces/interface';
 
 export function PokemonCard({ pokemon }: { pokemon: PokemonFull }) {
   return (
