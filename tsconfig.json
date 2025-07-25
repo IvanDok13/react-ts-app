@@ -31,8 +31,8 @@
       "@components/*": ["src/components/*"],
       "@styles/*": ["src/styles/*"],
       "@utils/*": ["src/utils/*"],
-      "@api/*": ["src/api/*"],
-      "@const/*": ["src/const/*"],
+      "@apis/*": ["src/apis/*"],
+      "@const/*": ["src/consts/*"],
       "@interfaces/*": ["src/interfaces/*"]
     }
   },

@@ -1,6 +1,6 @@
+import { fetchPokemonFull, fetchPokemonList } from '@apis/api';
 import axios from 'axios';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
-import { fetchPokemonFull, fetchPokemonList } from '../api';
 
 // Mock axios
 vi.mock('axios');

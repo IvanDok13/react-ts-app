@@ -1,12 +1,12 @@
+import { fetchPokemonFull, fetchPokemonList } from '@apis/api';
 import { ErrorButton } from '@components/error-button';
+import { PokemonList } from '@components/pokemon-list';
+import { SearchBar } from '@components/search-bar';
 import type { PokemonFull } from '@interfaces/interface';
 import type { ReactNode } from 'react';
 import { Component } from 'react';
-import { fetchPokemonFull, fetchPokemonList } from './api';
 import styles from './app.module.css';
-import { PokemonList } from './components/pokemon-list';
-import { SearchBar } from './components/search-bar';
-import { ITEM_PER_PAGE, LAST_TERM } from './const/const';
+import { ITEM_PER_PAGE, LAST_TERM } from './consts/const';
 
 interface State {
   items: PokemonFull[];

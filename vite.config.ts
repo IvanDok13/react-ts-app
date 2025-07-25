@@ -27,7 +27,7 @@ export default defineConfig({
       '@components': path.resolve(__dirname, './src/components'),
       '@const': path.resolve(__dirname, './src/const'),
       '@interfaces': path.resolve(__dirname, './src/interfaces'),
-      '@api': path.resolve(__dirname, './src/api'),
+      '@apis': path.resolve(__dirname, './src/apis'),
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },

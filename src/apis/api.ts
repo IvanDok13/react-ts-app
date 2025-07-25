@@ -1,6 +1,6 @@
-import { API, LIMIT_POKEMON } from '@const/const';
 import { Pokemon, PokemonFull, PokemonListResponse } from '@interfaces/interface';
 import axios from 'axios';
+import { API, LIMIT_POKEMON } from 'src/consts/const';
 
 export const fetchPokemonList = async (query: string = ''): Promise<Pokemon[]> => {
   try {
