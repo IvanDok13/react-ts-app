@@ -32,7 +32,7 @@ export class SearchBar extends Component<Props, State> {
 
     return (
       <div>
-        <input value={term} onChange={this.handleChange} placeholder="Pokemon name" />
+        <input id="search" value={term} onChange={this.handleChange} placeholder="Pokemon name" />
         <button className="button" onClick={this.handleClick} type="button">
           Go!
         </button>
