@@ -1,5 +1,4 @@
 import type { PokemonFull } from '@interfaces/interface';
-import type { ReactNode } from 'react';
 import { LoadingIndicator } from './loader/loading-indicator';
 import { PokemonCard } from './pokemon-card';
 
@@ -9,16 +8,16 @@ interface Props {
   error: string | null;
 }
 
-export function PokemonList({ loading, error, items }: Props): ReactNode {
+export function PokemonList({ loading, error, items }: Props) {
   if (loading) return <LoadingIndicator />;
   if (error) return <div>Error: {error}</div>;
-  if (items.length === 0) return <div>No results</div>;
+  if (items.length === 0) return <div>The Pokemon ran away</div>;
 
   return (
-    <main className="pokemon-list">
-      {items.map(p => (
-        <PokemonCard key={p.id} pokemon={p} />
+    <ul className="pokemon-list">
+      {items.map(pokemon => (
+        <PokemonCard key={pokemon.id} pokemon={pokemon} />
       ))}
-    </main>
+    </ul>
   );
 }
