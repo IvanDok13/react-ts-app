@@ -3,7 +3,7 @@ import { PokemonList } from '@components/pokemon-list';
 import { ITEM_PER_PAGE } from '@const/const';
 import type { PokemonFull } from '@interfaces/interface';
 import { useMemo } from 'react';
-import { useOutletContext, useSearchParams } from 'react-router-dom';
+import { Outlet, useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import styles from './home.module.css';
 
 interface ContextType {
@@ -14,30 +14,43 @@ interface ContextType {
 
 export function Home(): JSX.Element {
   const { items, loading, error } = useOutletContext<ContextType>();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const page = parseInt(searchParams.get('page') || '1', 10);
+  const { page = '1', id } = useParams();
+  const navigate = useNavigate();
 
+  const currentPage = parseInt(page, 10);
   const total = items.length;
 
   const paginatedItems = useMemo(() => {
-    const start = (page - 1) * ITEM_PER_PAGE;
+    const start = (currentPage - 1) * ITEM_PER_PAGE;
     return items.slice(start, start + ITEM_PER_PAGE);
-  }, [items, page]);
+  }, [items, currentPage]);
 
   const handlePageChange = (newPage: number) => {
-    setSearchParams({ page: newPage.toString() });
+    navigate(`/${newPage}`);
+  };
+
+  const handleItemClick = (ids: number) => {
+    navigate(`/${currentPage}/${ids}`);
   };
 
   return (
-    <div className={styles.home}>
-      <PokemonList items={paginatedItems} loading={loading} error={error} />
-      {!loading && !error && items.length > 0 && (
-        <Pagination
-          currentPage={page}
-          totalItems={total}
-          itemsPerPage={ITEM_PER_PAGE}
-          onPageChange={handlePageChange}
-        />
+    <div className={styles.splitLayout}>
+      <div className={styles.leftColumn}>
+        <PokemonList items={paginatedItems} loading={loading} error={error} onItemClick={handleItemClick} />
+        {!loading && !error && items.length > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalItems={total}
+            itemsPerPage={ITEM_PER_PAGE}
+            onPageChange={handlePageChange}
+          />
+        )}
+      </div>
+
+      {id && (
+        <div className={styles.rightColumn}>
+          <Outlet />
+        </div>
       )}
     </div>
   );
