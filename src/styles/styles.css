@@ -1,15 +1,6 @@
 @import 'normalize.css';
 @import 'reset.css';
 
-/* viaoda-libre-regular - latin */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Viaoda Libre';
-  font-style: normal;
-  font-weight: 400;
-  src: url('../fonts/viaoda-libre-v18-latin-regular.woff2') format('woff2');
-}
-
 *,
 *::before,
 *::after {
@@ -26,7 +17,6 @@ html {
   box-sizing: border-box;
   font-size: 100%;
   color: #2c3e50;
-  font-family: 'Viaoda Libre', sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-align: center;
@@ -39,7 +29,6 @@ body {
   width: 100%;
   height: 100vh;
   color: var(--color-font-dark);
-  font-family: 'Viaoda Libre', sans-serif;
   margin: 0 auto;
   padding: 15px;
 }
@@ -53,6 +42,11 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+header,
+footer {
+  background: rgb(171 39 39 / 36%);
 }
 
 .show-password {
@@ -80,4 +74,84 @@ footer {
   padding: 10px;
   border-radius: 4px;
   box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.button,
+.errorButton,
+.error-boundary {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #2a0f0f;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #f44336;
+  background-image: linear-gradient(to bottom, #f44336, #e91e63);
+}
+
+.errorButton {
+  background-color: #f00;
+  position: sticky;
+  left: 1110px;
+  top: 600px;
+  display: flex;
+}
+
+.pokemon-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pokemon-card {
+  border: 1px solid #333;
+  margin: 8px;
+  padding: 8px;
+  width: 150px;
+}
+
+.error-boundary {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+  animation: fade-in 0.5s ease-in-out;
+}
+
+.error-boundary__close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
