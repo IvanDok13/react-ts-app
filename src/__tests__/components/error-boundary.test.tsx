@@ -24,7 +24,11 @@ describe('ErrorBoundary component', () => {
         <ThrowingComponent shouldThrow />
       </ErrorBoundary>,
     );
-    expect(screen.getByText(/Error. Please reload/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /Prepare for trouble! And make it double! To protect the world from devastation, To unite all peoples within our nation, To denounce the evils of truth and love, To extend our reach to the stars above! Team REACT 2025 blast off at the speed of light! Surrender now, or prepare to fight!/i,
+      ),
+    ).toBeInTheDocument();
   });
 
   it('displays fallback UI when error occurs', () => {
@@ -33,7 +37,11 @@ describe('ErrorBoundary component', () => {
         <ThrowingComponent shouldThrow />
       </ErrorBoundary>,
     );
-    expect(screen.getByText('Error. Please reload')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Prepare for trouble! And make it double! To protect the world from devastation, To unite all peoples within our nation, To denounce the evils of truth and love, To extend our reach to the stars above! Team REACT 2025 blast off at the speed of light! Surrender now, or prepare to fight!',
+      ),
+    ).toBeInTheDocument();
   });
 
   it('logs error to console', () => {
@@ -74,6 +82,10 @@ describe('ErrorBoundary component', () => {
     );
 
     fireEvent.click(screen.getByText('Trigger Error'));
-    expect(screen.getByText('Error. Please reload')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Prepare for trouble! And make it double! To protect the world from devastation, To unite all peoples within our nation, To denounce the evils of truth and love, To extend our reach to the stars above! Team REACT 2025 blast off at the speed of light! Surrender now, or prepare to fight!',
+      ),
+    ).toBeInTheDocument();
   });
 });
