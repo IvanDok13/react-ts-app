@@ -6,9 +6,10 @@
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  color: rgb(0, 0, 0);
+  color: rgb(0 0 0);
   font-weight: bold;
 }
+
 .not-found {
   width: 100vw;
   height: 100vh;
@@ -16,7 +17,7 @@
 }
 
 .not-found-text {
-  padding: 5px 5px;
+  padding: 5px;
   border-radius: 5px;
 }
 
@@ -28,8 +29,8 @@
 .backButton,
 .homeButton,
 .not-found-text {
-  background-color: rgba(221, 61, 37, 0.925);
-  border: 2px solid rgb(255, 98, 0);
+  background-color: rgb(221 61 37 / 92.5%);
+  border: 2px solid rgb(255 98 0);
 }
 
 .backButton,
