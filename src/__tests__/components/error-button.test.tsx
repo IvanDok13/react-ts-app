@@ -21,10 +21,14 @@ describe('ErrorButton component with ErrorBoundary', () => {
       </ErrorBoundary>,
     );
 
-    const button = screen.getByRole('button', { name: /get error/i });
+    const button = screen.getByRole('button', { name: /Go Error/i });
     fireEvent.click(button);
 
-    expect(screen.getByText('Error. Please reload')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Prepare for trouble! And make it double! To protect the world from devastation, To unite all peoples within our nation, To denounce the evils of truth and love, To extend our reach to the stars above! Team REACT 2025 blast off at the speed of light! Surrender now, or prepare to fight!',
+      ),
+    ).toBeInTheDocument();
   });
 
   it('renders fallback UI after error is thrown by ErrorButton', () => {
@@ -34,8 +38,12 @@ describe('ErrorButton component with ErrorBoundary', () => {
       </ErrorBoundary>,
     );
 
-    fireEvent.click(screen.getByRole('button', { name: /get error/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Go Error/i }));
 
-    expect(screen.getByText('Error. Please reload')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Prepare for trouble! And make it double! To protect the world from devastation, To unite all peoples within our nation, To denounce the evils of truth and love, To extend our reach to the stars above! Team REACT 2025 blast off at the speed of light! Surrender now, or prepare to fight!',
+      ),
+    ).toBeInTheDocument();
   });
 });
