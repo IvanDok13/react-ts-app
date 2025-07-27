@@ -27,7 +27,7 @@ export function PageLayout() {
       setSearchParams({ page: '1' });
 
       fetchPokemonList(trimmed)
-        .then(list => Promise.all(list.map(p => fetchPokemonFull(p.url))))
+        .then(list => Promise.all(list.map(p => fetchPokemonFull(p.name))))
         .then(fulls => {
           setItems(fulls);
           setLoading(false);
