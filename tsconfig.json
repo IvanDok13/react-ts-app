@@ -33,7 +33,10 @@
       "@utils/*": ["src/utils/*"],
       "@apis/*": ["src/apis/*"],
       "@const/*": ["src/consts/*"],
-      "@interfaces/*": ["src/interfaces/*"]
+      "@interfaces/*": ["src/interfaces/*"],
+      "@pages/*": ["src/pages/*"],
+      "@router/*": ["src/routers/*"],
+      "@hooks/*": ["src/hooks/*"]
     }
   },
   "include": [
