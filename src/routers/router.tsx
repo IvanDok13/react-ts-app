@@ -11,9 +11,10 @@ export function AppRouter() {
       <Routes>
         <Route element={<PageLayout />}>
           <Route path={AppRoutes.HOME_ROUTE} element={<Home />} />
+          <Route path={AppRoutes.ABOUT_ROUTE} element={<About />} />
+
           {/* <Route path="pokemon/:name" element={<Details />} /> */}
         </Route>
-        <Route path={AppRoutes.ABOUT_ROUTE} element={<About />} />
         <Route path={AppRoutes.ERROR_ROUTE} element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
