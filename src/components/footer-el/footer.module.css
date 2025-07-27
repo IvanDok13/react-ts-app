@@ -1,0 +1,35 @@
+.footer {
+  width: 100%;
+}
+
+.footer-wrapper {
+  display: flex;
+  width: 100%;
+  padding: 10px 20px;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(12.5px);
+}
+
+.footer-copyright {
+  display: flex;
+}
+
+.footer-github-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.footer-info {
+  display: flex;
+  align-items: center;
+}
+
+.footer-github {
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: no-repeat center url('public/svg/rss-logo.svg');
+  background-size: contain;
+}
