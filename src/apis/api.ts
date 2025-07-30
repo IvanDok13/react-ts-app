@@ -15,12 +15,13 @@ export const fetchPokemonList = async (query: string = ''): Promise<Pokemon[]> =
   }
 };
 
-export const fetchPokemonFull = async (url: string): Promise<PokemonFull> => {
+export const fetchPokemonFull = async (idOrName: string): Promise<PokemonFull> => {
+  const url = `${API}/${idOrName}`;
   try {
     const response = await axios.get<PokemonFull>(url);
     return response.data;
   } catch (error) {
     console.error('Error fetching full Pokémon data:', error);
-    throw new Error('API Error');
+    throw error;
   }
 };

@@ -1,42 +1,52 @@
-import type { ChangeEvent, ReactNode } from 'react';
-import { Component } from 'react';
+import { useStorage } from '@hooks/UseStorage';
+import { useEffect, useRef, useState, type ChangeEvent } from 'react';
 
 interface Props {
   onSearch: (term: string) => void;
 }
-interface State {
-  term: string;
-}
 
-export class SearchBar extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    const saved = localStorage.getItem('searchTerm') || '';
-    this.state = { term: saved };
-  }
+export function SearchBar({ onSearch }: Props): JSX.Element {
+  const { getStorage, setStorage } = useStorage();
+  const [term, setTerm] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  public handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    this.setState({ term: event.currentTarget.value });
+  useEffect(() => {
+    const saved = getStorage();
+    if (saved) setTerm(saved);
+    inputRef.current?.focus();
+  }, [getStorage]);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setTerm(event.currentTarget.value);
   };
 
-  public handleClick = (): void => {
-    const { term } = this.state;
+  const handleClick = () => {
     const trimmed = term.trim();
-    const { props } = this;
-    props.onSearch(trimmed);
-    localStorage.setItem('searchTerm', trimmed);
+    onSearch(trimmed);
+    setStorage(trimmed);
   };
 
-  public render(): ReactNode {
-    const { term } = this.state;
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleClick();
+    }
+  };
 
-    return (
-      <div>
-        <input id="search" value={term} onChange={this.handleChange} placeholder="Pokemon name" />
-        <button className="button" onClick={this.handleClick} type="button">
+  return (
+    <div>
+      <form noValidate method="" className="form">
+        <input
+          id="search"
+          value={term}
+          onChange={handleChange}
+          placeholder="Pokemon name"
+          onKeyDown={handleKeyDown}
+          ref={inputRef}
+        />
+        <button className="button" onClick={handleClick} type="button">
           Go!
         </button>
-      </div>
-    );
-  }
+      </form>
+    </div>
+  );
 }

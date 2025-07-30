@@ -4,13 +4,12 @@ import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 // Mock axios
 vi.mock('axios');
-vi.spyOn(console, 'error').mockImplementation(() => {});
 const mockedAxios = axios as unknown as { get: Mock };
 
 describe('API Integration Tests', () => {
   beforeEach(() => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
     vi.resetAllMocks();
+    vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   describe('fetchPokemonList', () => {
@@ -64,16 +63,17 @@ describe('API Integration Tests', () => {
 
       mockedAxios.get.mockResolvedValueOnce({ data: mockData });
 
-      const data = await fetchPokemonFull('https://pokeapi.co/api/v2/pokemon/25/');
+      const data = await fetchPokemonFull('25');
       expect(data.name).toBe('pikachu');
       expect(data.id).toBe(25);
+      expect(data.types[0].type.name).toBe('electric');
     });
 
     it('throws error when fetchPokemonFull fails', async () => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       mockedAxios.get.mockRejectedValueOnce(new Error('API Error'));
 
-      await expect(fetchPokemonFull('invalid_url')).rejects.toThrow('API Error');
+      await expect(fetchPokemonFull('invalid_id')).rejects.toThrow('API Error');
       expect(errorSpy).toHaveBeenCalledWith('Error fetching full Pokémon data:', expect.any(Error));
     });
   });
