@@ -1,4 +1,5 @@
 import { SearchBar } from '@components/search-bar';
+import { ThemeSwitcher } from '@components/theme-switcher/theme-switcher';
 import { AppRoutes } from '@router/routes';
 import { Link } from 'react-router-dom';
 import styles from './header.module.css';
@@ -19,6 +20,7 @@ export function Header({ onSearch }: Props) {
           About
         </Link>
         <SearchBar onSearch={onSearch} />
+        <ThemeSwitcher />
       </div>
     </header>
   );

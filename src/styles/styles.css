@@ -177,3 +177,25 @@ footer {
   width: 50px;
   height: auto;
 }
+
+:root[data-theme='light'] {
+  --bg-color: white;
+  --text-color: black;
+}
+
+:root[data-theme='dark'] {
+  --bg-color: #121212;
+  --text-color: white;
+
+  .button {
+    background-image: linear-gradient(to bottom, #435b73, #1565c0);
+  }
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
