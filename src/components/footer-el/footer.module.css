@@ -30,6 +30,6 @@
   display: block;
   width: 25px;
   height: 25px;
-  background: no-repeat center url('/svg/rss-logo.svg');
+  background: no-repeat center url('public/svg/rsslogo.svg');
   background-size: contain;
 }
