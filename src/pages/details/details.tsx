@@ -22,7 +22,6 @@ export function Details() {
     setLoading(true);
     fetchPokemonFull(id)
       .then(data => {
-        console.log(data);
         setPokemon(data);
         setLoading(false);
       })

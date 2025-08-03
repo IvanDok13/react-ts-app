@@ -46,7 +46,6 @@ export function PageLayout() {
   );
 
   useEffect(() => {
-    console.log('PageLayout mounted');
     handleSearch(term);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
