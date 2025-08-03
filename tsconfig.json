@@ -36,7 +36,8 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@pages/*": ["src/pages/*"],
       "@router/*": ["src/routers/*"],
-      "@hooks/*": ["src/hooks/*"]
+      "@hooks/*": ["src/hooks/*"],
+      "@context/*": ["src/context/*"]
     }
   },
   "include": [
