@@ -43,6 +43,10 @@ export function Details() {
       </button>
       <h2>{pokemon.name}</h2>
       <img src={pokemon.sprites.front_default ?? ''} alt={pokemon.name} />
+      <p>Type: {pokemon.types?.map(t => t.type.name).join(', ') || 'Unknown'}</p>
+      <p>Abilities: {pokemon.abilities?.map(a => a.ability.name).join(', ') || 'None'}</p>
+      <p>Height: {pokemon.height}</p>
+      <p>Weight: {pokemon.weight}</p>
     </div>
   );
 }
