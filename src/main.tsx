@@ -3,6 +3,7 @@ import { AppRouter } from '@router/router';
 import '@styles/styles.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { ThemeProvider } from './context/themeContext';
 
 const container = document.createElement('div');
 container.id = 'app';
@@ -16,8 +17,10 @@ if (!(root instanceof HTMLElement)) {
 
 createRoot(root).render(
   <StrictMode>
-    <ErrorBoundary>
-      <AppRouter />
-    </ErrorBoundary>
+    <ThemeProvider>
+      <ErrorBoundary>
+        <AppRouter />
+      </ErrorBoundary>
+    </ThemeProvider>
   </StrictMode>,
 );
