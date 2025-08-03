@@ -8,9 +8,9 @@ export interface PokemonFull {
   name: string;
   sprites: { front_default: string | null };
   types: { type: { name: string } }[];
-  description?: string;
-  experience?: number;
   abilities?: { ability: { name: string } }[];
+  height?: number;
+  weight?: number;
 }
 
 export interface PokemonListResponse {
