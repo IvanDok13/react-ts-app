@@ -1,15 +1,11 @@
 import { Header } from '@components/header-el/header';
-import { fireEvent, render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { fireEvent, screen } from '@testing-library/react';
+import { renderWithProviders } from 'src/__tests__/test-utils/test-utils';
 import { describe, expect, it, vi } from 'vitest';
-
-const renderWithRouter = (component: React.ReactElement) => {
-  return render(<BrowserRouter>{component}</BrowserRouter>);
-};
 
 describe('Header', () => {
   it('renders logo, title, and About link', () => {
-    renderWithRouter(<Header onSearch={() => {}} />);
+    renderWithProviders(<Header onSearch={() => {}} />);
 
     expect(screen.getByText(/pokéfinder/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /about/i })).toHaveAttribute('href', '/about');
@@ -18,7 +14,7 @@ describe('Header', () => {
 
   it('calls onSearch when SearchBar is used', () => {
     const handleSearch = vi.fn();
-    renderWithRouter(<Header onSearch={handleSearch} />);
+    renderWithProviders(<Header onSearch={handleSearch} />);
 
     const input = screen.getByPlaceholderText(/pokemon name/i);
     fireEvent.change(input, { target: { value: 'squirtle' } });
