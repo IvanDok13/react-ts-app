@@ -21,6 +21,10 @@ vi.mock('@components/error-button', () => ({
   ErrorButton: () => <div data-testid="mock-error-button">Mock Error Button</div>,
 }));
 
+vi.mock('@components/selected-banner/selected-banner', () => ({
+  SelectedBanner: () => <div data-testid="mock-selected-banner">Mock Selected Banner</div>,
+}));
+
 describe('PageLayout component', () => {
   const mockPokemon: PokemonFull = {
     id: 25,
@@ -33,7 +37,7 @@ describe('PageLayout component', () => {
     vi.clearAllMocks();
   });
 
-  it('renders header, footer, error button, and children route', async () => {
+  it('renders header, selected banner, footer, error button, and children route', async () => {
     vi.spyOn(api, 'fetchPokemonList').mockResolvedValueOnce([{ name: 'pikachu', url: '' }]);
     vi.spyOn(api, 'fetchPokemonFull').mockResolvedValueOnce(mockPokemon);
 
@@ -51,6 +55,7 @@ describe('PageLayout component', () => {
     expect(screen.getByTestId('mock-footer')).toBeInTheDocument();
     expect(screen.getByTestId('mock-error-button')).toBeInTheDocument();
     expect(await screen.findByText('Mock Home')).toBeInTheDocument();
+    expect(screen.getByTestId('mock-selected-banner')).toBeInTheDocument();
   });
 
   it('handles search error correctly', async () => {
