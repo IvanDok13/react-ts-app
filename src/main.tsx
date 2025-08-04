@@ -3,7 +3,9 @@ import { AppRouter } from '@router/router';
 import '@styles/styles.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { ThemeProvider } from './context/themeContext';
+import { store } from './store/store';
 
 const container = document.createElement('div');
 container.id = 'app';
@@ -18,9 +20,11 @@ if (!(root instanceof HTMLElement)) {
 createRoot(root).render(
   <StrictMode>
     <ThemeProvider>
-      <ErrorBoundary>
-        <AppRouter />
-      </ErrorBoundary>
+      <Provider store={store}>
+        <ErrorBoundary>
+          <AppRouter />
+        </ErrorBoundary>
+      </Provider>
     </ThemeProvider>
   </StrictMode>,
 );
