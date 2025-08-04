@@ -32,6 +32,7 @@ export default defineConfig({
       '@router': path.resolve(__dirname, './src/routers'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@context': path.resolve(__dirname, './src/context'),
+      '@store': path.resolve(__dirname, './src/store'),
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
