@@ -141,6 +141,7 @@ footer {
   padding: 8px;
   width: 150px;
   height: 174px;
+  cursor: pointer;
 }
 
 .error-boundary {
@@ -190,6 +191,12 @@ footer {
   .button {
     background-image: linear-gradient(to bottom, #435b73, #1565c0);
   }
+
+  .banner {
+    background: #333;
+
+    /* color: ; */
+  }
 }
 
 body {
@@ -198,4 +205,16 @@ body {
   transition:
     background 0.3s,
     color 0.3s;
+}
+
+.pokemon-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: capitalize;
+  justify-content: center;
+}
+
+h2 {
+  text-transform: capitalize;
 }
