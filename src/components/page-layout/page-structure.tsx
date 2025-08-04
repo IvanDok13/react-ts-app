@@ -2,6 +2,7 @@ import { fetchPokemonFull, fetchPokemonList } from '@apis/api';
 import { ErrorButton } from '@components/error-button';
 import { Footer } from '@components/footer-el/footer';
 import { Header } from '@components/header-el/header';
+import { SelectedBanner } from '@components/selected-banner/selected-banner';
 import { LAST_TERM } from '@const/const';
 import type { PokemonFull } from '@interfaces/interface';
 import { useCallback, useEffect, useState } from 'react';
@@ -56,6 +57,7 @@ export function PageLayout() {
       <main className="main">
         <Outlet context={{ items, loading, error }} />
       </main>
+      <SelectedBanner />
       <Footer />
       <ErrorButton />
     </>
