@@ -1,8 +1,9 @@
 import { fetchPokemonFull, fetchPokemonList } from '@apis/api';
 import { ErrorButton } from '@components/error-button';
-import { Footer } from '@components/footer-el/footer';
-import { Header } from '@components/header-el/header';
-import { LAST_TERM } from '@const/const';
+import { Footer } from '@components/footer/footer';
+import { Header } from '@components/header/header';
+import { SelectedBanner } from '@components/selected-banner/selected-banner';
+import { useStorage } from '@hooks/UseStorage';
 import type { PokemonFull } from '@interfaces/interface';
 import { useCallback, useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
@@ -15,7 +16,8 @@ export function PageLayout() {
   const [items, setItems] = useState<PokemonFull[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [term, setTerm] = useState<string>(LAST_TERM ?? '');
+  const { getStorage } = useStorage();
+  const [term, setTerm] = useState<string>(getStorage ?? '');
 
   const handleSearch = useCallback(
     (newTerm: string): void => {
@@ -46,7 +48,6 @@ export function PageLayout() {
   );
 
   useEffect(() => {
-    console.log('PageLayout mounted');
     handleSearch(term);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -57,6 +58,7 @@ export function PageLayout() {
       <main className="main">
         <Outlet context={{ items, loading, error }} />
       </main>
+      <SelectedBanner />
       <Footer />
       <ErrorButton />
     </>

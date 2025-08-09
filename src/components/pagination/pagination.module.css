@@ -8,12 +8,12 @@
 .pagination button {
   padding: 0.5rem 1rem;
   border: 1px solid #ddd;
-  background-color: white;
+  background-color: rgb(173 63 63 / 73%);
   cursor: pointer;
 }
 
 .pagination .active {
-  background-color: #007bff;
+  background-color: #435b73;
   color: white;
   font-weight: bold;
 }

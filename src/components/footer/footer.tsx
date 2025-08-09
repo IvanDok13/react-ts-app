@@ -16,7 +16,7 @@ export function Footer() {
           </a>
         </div>
         <div className={styles.footerInfo}>
-          <a className={styles.footerGithub} href="https://rs.school/" aria-label="RSSchool link" />
+          <a className={styles.footerGithub} href="https://rs.school/courses/reactjs" aria-label="RSSchool link" />
         </div>
       </div>
     </footer>

@@ -1,7 +1,13 @@
 import { PokemonCard } from '@components/pokemon-card';
 import type { PokemonFull } from '@interfaces/interface';
+import { store } from '@store/store';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { Provider } from 'react-redux';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+const renderWithProvider = (ui: React.ReactElement) => {
+  return render(<Provider store={store}>{ui}</Provider>);
+};
 
 describe('PokemonCard component', () => {
   const mock: PokemonFull = {
@@ -22,8 +28,12 @@ describe('PokemonCard component', () => {
     types: [],
   };
 
+  beforeEach(() => {
+    store.dispatch({ type: 'selected/clearSelected' });
+  });
+
   it('renders the card with correct name, types, and image', () => {
-    render(<PokemonCard pokemon={mock} />);
+    renderWithProvider(<PokemonCard pokemon={mock} />);
 
     expect(screen.getByRole('button')).toBeInTheDocument();
     expect(screen.getByText(/bulbasaur/i)).toBeInTheDocument();
@@ -35,7 +45,7 @@ describe('PokemonCard component', () => {
   });
 
   it('handles missing image and types gracefully', () => {
-    render(<PokemonCard pokemon={broken} />);
+    renderWithProvider(<PokemonCard pokemon={broken} />);
 
     expect(screen.getByRole('button')).toBeInTheDocument();
     expect(screen.getByText(/missingno/i)).toBeInTheDocument();
@@ -45,7 +55,7 @@ describe('PokemonCard component', () => {
 
   it('calls onClick when clicked', () => {
     const onClick = vi.fn();
-    render(<PokemonCard pokemon={mock} onClick={onClick} />);
+    renderWithProvider(<PokemonCard pokemon={mock} onClick={onClick} />);
 
     fireEvent.click(screen.getByRole('button'));
     expect(onClick).toHaveBeenCalledTimes(1);
@@ -53,12 +63,24 @@ describe('PokemonCard component', () => {
 
   it('calls onClick when Enter or Space is pressed', () => {
     const onClick = vi.fn();
-    render(<PokemonCard pokemon={mock} onClick={onClick} />);
+    renderWithProvider(<PokemonCard pokemon={mock} onClick={onClick} />);
 
     const button = screen.getByRole('button');
     fireEvent.keyDown(button, { key: 'Enter' });
     fireEvent.keyDown(button, { key: ' ' });
 
     expect(onClick).toHaveBeenCalledTimes(2);
+  });
+
+  it('toggles checkbox selection in redux state', () => {
+    renderWithProvider(<PokemonCard pokemon={mock} />);
+    const checkbox = screen.getByRole('checkbox') as HTMLInputElement;
+    expect(checkbox.checked).toBe(false);
+
+    fireEvent.click(checkbox);
+    expect(checkbox.checked).toBe(true);
+
+    fireEvent.click(checkbox);
+    expect(checkbox.checked).toBe(false);
   });
 });

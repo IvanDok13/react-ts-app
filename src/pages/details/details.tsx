@@ -13,7 +13,7 @@ export function Details() {
   };
 
   const [pokemon, setPokemon] = useState<PokemonFull | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -22,7 +22,6 @@ export function Details() {
     setLoading(true);
     fetchPokemonFull(id)
       .then(data => {
-        console.log(data);
         setPokemon(data);
         setLoading(false);
       })
@@ -43,6 +42,10 @@ export function Details() {
       </button>
       <h2>{pokemon.name}</h2>
       <img src={pokemon.sprites.front_default ?? ''} alt={pokemon.name} />
+      <p>Type: {pokemon.types?.map(t => t.type.name).join(', ') || 'Unknown'}</p>
+      <p>Abilities: {pokemon.abilities?.map(a => a.ability.name).join(', ') || 'None'}</p>
+      <p>Height: {pokemon.height}</p>
+      <p>Weight: {pokemon.weight}</p>
     </div>
   );
 }
