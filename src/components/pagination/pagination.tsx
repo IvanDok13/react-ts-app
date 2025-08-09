@@ -1,3 +1,4 @@
+import { DEFAULT_DELTA } from '@const/const';
 import styles from './pagination.module.css';
 
 interface Props {
@@ -10,15 +11,11 @@ interface Props {
 export function Pagination({ currentPage, totalItems, itemsPerPage, onPageChange }: Props): JSX.Element {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  const getPageRange = () => {
-    const delta = 2;
-    const range = [];
+  const getPageRange = (delta: number = DEFAULT_DELTA): number[] => {
+    const start = Math.max(1, currentPage - delta);
+    const end = Math.min(totalPages, currentPage + delta);
 
-    for (let i = Math.max(1, currentPage - delta); i <= Math.min(totalPages, currentPage + delta); i += 1) {
-      range.push(i);
-    }
-
-    return range;
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   };
 
   return (
