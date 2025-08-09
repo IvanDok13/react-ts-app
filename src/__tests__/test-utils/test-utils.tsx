@@ -2,12 +2,12 @@ import { ThemeProvider } from '@context/themeContext';
 import { store } from '@store/store';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
-export const renderWithProviders = (component: React.ReactElement) => {
+export const renderThemeProvider = (component: React.ReactElement) => {
   return render(
     <ThemeProvider>
-      <BrowserRouter>{component}</BrowserRouter>
+      <MemoryRouter initialEntries={['/']}>{component}</MemoryRouter>
     </ThemeProvider>,
   );
 };
