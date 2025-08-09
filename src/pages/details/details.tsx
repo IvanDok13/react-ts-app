@@ -13,7 +13,7 @@ export function Details() {
   };
 
   const [pokemon, setPokemon] = useState<PokemonFull | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
