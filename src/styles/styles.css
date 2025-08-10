@@ -194,8 +194,10 @@ footer {
 
   .banner {
     background: #333;
+  }
 
-    /* color: ; */
+  .form {
+    color: #0b0b0b;
   }
 }
 
