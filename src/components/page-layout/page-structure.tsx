@@ -1,11 +1,12 @@
-import { fetchPokemonFull, fetchPokemonList } from '@apis/api';
 import { ErrorButton } from '@components/error-button';
 import { Footer } from '@components/footer/footer';
 import { Header } from '@components/header/header';
+import { RefetchButton } from '@components/refetch-btn';
 import { SelectedBanner } from '@components/selected-banner/selected-banner';
 import { useStorage } from '@hooks/UseStorage';
 import type { PokemonFull } from '@interfaces/interface';
-import { useCallback, useEffect, useState } from 'react';
+import { useGetPokemonListFullQuery } from '@store/pokeApi';
+import { useCallback, useMemo, useState } from 'react';
 import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 export function PageLayout() {
@@ -13,32 +14,24 @@ export function PageLayout() {
   const location = useLocation();
   const [, setSearchParams] = useSearchParams();
 
-  const [items, setItems] = useState<PokemonFull[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const { getStorage } = useStorage();
   const [term, setTerm] = useState<string>(getStorage ?? '');
+
+  const { data: items = [], isLoading, isFetching, error } = useGetPokemonListFullQuery({ term });
+
+  let errMsg: string | null;
+  const loading = isLoading || isFetching;
+  if (error && 'status' in error && typeof error.data === 'string' && error.data) {
+    errMsg = 'Network Error';
+  } else {
+    errMsg = null;
+  }
 
   const handleSearch = useCallback(
     (newTerm: string): void => {
       const trimmed = newTerm.trim();
-      setLoading(true);
-      setError(null);
-      setItems([]);
       setTerm(trimmed);
       setSearchParams({ page: '1' });
-
-      fetchPokemonList(trimmed)
-        .then(list => Promise.all(list.map(p => fetchPokemonFull(p.name))))
-        .then(fulls => {
-          setItems(fulls);
-          setLoading(false);
-        })
-        .catch(catchError => {
-          const errorMessage = catchError instanceof Error ? catchError.message : 'Unknown error';
-          setError(errorMessage);
-          setLoading(false);
-        });
 
       if (location.pathname !== '/') {
         navigate('/');
@@ -47,16 +40,21 @@ export function PageLayout() {
     [navigate, location.pathname, setSearchParams],
   );
 
-  useEffect(() => {
-    handleSearch(term);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const outletContext = useMemo(
+    () => ({
+      items: items as PokemonFull[],
+      loading,
+      error: errMsg,
+    }),
+    [items, loading, errMsg],
+  );
 
   return (
     <>
       <Header onSearch={handleSearch} />
+      <RefetchButton term={term} />
       <main className="main">
-        <Outlet context={{ items, loading, error }} />
+        <Outlet context={outletContext} />
       </main>
       <SelectedBanner />
       <Footer />
