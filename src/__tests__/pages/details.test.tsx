@@ -1,71 +1,96 @@
-import * as api from '@apis/api';
-import { LoadingIndicator } from '@components/loader/loading-indicator';
-import { PokemonFull } from '@interfaces/interface';
+import type { PokemonFull } from '@interfaces/interface';
 import { Details } from '@pages/details/details';
+import { useGetPokemonFullQuery } from '@store/pokeApi';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi, type Mock } from 'vitest';
 
-// Mock fetchPokemonFull
-vi.mock('@apis/api');
+vi.mock('@store/pokeApi', () => ({
+  useGetPokemonFullQuery: vi.fn(),
+}));
 
 const mockPokemon: PokemonFull = {
   id: 25,
   name: 'pikachu',
   sprites: { front_default: 'https://pokeapi.co/media/sprites/pokemon/25.png' },
-  types: [],
+  types: [{ type: { name: 'electric' } }],
+  abilities: [{ ability: { name: 'static' } }],
+  height: 4,
+  weight: 60,
 };
 
-const renderWithRoute = (initialPath: string) => {
-  return render(
+const renderWithRoute = (initialPath: string) =>
+  render(
     <MemoryRouter initialEntries={[initialPath]}>
       <Routes>
         <Route path="/:page/:id" element={<Details />} />
       </Routes>
     </MemoryRouter>,
   );
-};
 
-describe('Details component', () => {
+describe('Details component (RTK Query)', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('displays loading indicator initially', async () => {
-    vi.spyOn(api, 'fetchPokemonFull').mockReturnValue(new Promise(() => {}));
+  it('shows loading indicator while fetching', () => {
+    (useGetPokemonFullQuery as unknown as Mock).mockReturnValue({
+      data: undefined,
+      isLoading: true,
+      error: undefined,
+    });
 
     renderWithRoute('/1/25');
     expect(screen.getByRole('status')).toBeInTheDocument();
-    <LoadingIndicator />;
   });
 
-  it('displays Pokémon details when loaded', async () => {
-    vi.spyOn(api, 'fetchPokemonFull').mockResolvedValue(mockPokemon);
+  it('renders Pokémon details when loaded', async () => {
+    (useGetPokemonFullQuery as unknown as Mock).mockReturnValue({
+      data: mockPokemon,
+      isLoading: false,
+      error: undefined,
+    });
 
     renderWithRoute('/1/25');
 
     expect(await screen.findByText(/pikachu/i)).toBeInTheDocument();
     expect(screen.getByRole('img')).toHaveAttribute('src', mockPokemon.sprites.front_default);
+    expect(screen.getByText(/type:/i)).toBeInTheDocument();
+    expect(screen.getByText(/abilities:/i)).toBeInTheDocument();
+    expect(screen.getByText(/height:/i)).toBeInTheDocument();
+    expect(screen.getByText(/weight:/i)).toBeInTheDocument();
   });
 
-  it('displays error message if fetch fails', async () => {
-    vi.spyOn(api, 'fetchPokemonFull').mockRejectedValue(new Error('Failed to load'));
+  it('shows error message on fetch failure', async () => {
+    (useGetPokemonFullQuery as unknown as Mock).mockReturnValue({
+      data: undefined,
+      isLoading: false,
+      error: { status: 500, data: 'Server Error' },
+    });
 
     renderWithRoute('/1/25');
 
-    expect(await screen.findByText(/error: failed to load/i)).toBeInTheDocument();
+    expect(await screen.findByText(/error: failed to load details/i)).toBeInTheDocument();
   });
 
-  it('displays fallback message if no Pokémon returned', async () => {
-    vi.spyOn(api, 'fetchPokemonFull').mockResolvedValue(null as unknown as PokemonFull);
+  it('shows fallback when no Pokémon is returned', async () => {
+    (useGetPokemonFullQuery as unknown as Mock).mockReturnValue({
+      data: undefined,
+      isLoading: false,
+      error: undefined,
+    });
 
     renderWithRoute('/1/25');
 
     expect(await screen.findByText(/pokemon run away/i)).toBeInTheDocument();
   });
 
-  it('navigates back on close button click', async () => {
-    vi.spyOn(api, 'fetchPokemonFull').mockResolvedValue(mockPokemon);
+  it('navigates back to the list on Close', async () => {
+    (useGetPokemonFullQuery as unknown as Mock).mockReturnValue({
+      data: mockPokemon,
+      isLoading: false,
+      error: undefined,
+    });
 
     render(
       <MemoryRouter initialEntries={['/3/25']}>
