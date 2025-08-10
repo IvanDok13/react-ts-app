@@ -1,9 +1,9 @@
-import * as api from '@apis/api';
 import { PageLayout } from '@components/page-layout/page-structure';
 import type { PokemonFull } from '@interfaces/interface';
+import { useGetPokemonListFullQuery } from '@store/pokeApi';
 import { screen, waitFor } from '@testing-library/react';
 import { Route, Routes } from 'react-router-dom';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { renderThemeProvider } from '../test-utils/test-utils';
 
 vi.mock('@components/header/header', () => ({
@@ -26,7 +26,19 @@ vi.mock('@components/selected-banner/selected-banner', () => ({
   SelectedBanner: () => <div data-testid="mock-selected-banner">Mock Selected Banner</div>,
 }));
 
-describe('PageLayout component', () => {
+vi.mock('@components/refetch-btn', () => ({
+  RefetchButton: () => <div data-testid="mock-refetch">Mock Refetch</div>,
+}));
+
+vi.mock('@store/pokeApi', async importOriginal => {
+  const actual = await importOriginal<typeof import('@store/pokeApi')>();
+  return {
+    ...actual,
+    useGetPokemonListFullQuery: vi.fn(),
+  };
+});
+
+describe('PageLayout component (RTK Query)', () => {
   const mockPokemon: PokemonFull = {
     id: 25,
     name: 'pikachu',
@@ -39,8 +51,13 @@ describe('PageLayout component', () => {
   });
 
   it('renders header, selected banner, footer, error button, and children route', async () => {
-    vi.spyOn(api, 'fetchPokemonList').mockResolvedValueOnce([{ name: 'pikachu', url: '' }]);
-    vi.spyOn(api, 'fetchPokemonFull').mockResolvedValueOnce(mockPokemon);
+    (useGetPokemonListFullQuery as unknown as Mock).mockReturnValue({
+      data: [mockPokemon],
+      isLoading: false,
+      isFetching: false,
+      error: undefined,
+      refetch: vi.fn(),
+    });
 
     renderThemeProvider(
       <Routes>
@@ -55,10 +72,17 @@ describe('PageLayout component', () => {
     expect(screen.getByTestId('mock-error-button')).toBeInTheDocument();
     expect(await screen.findByText('Mock Home')).toBeInTheDocument();
     expect(screen.getByTestId('mock-selected-banner')).toBeInTheDocument();
+    expect(screen.getByTestId('mock-refetch')).toBeInTheDocument();
   });
 
   it('handles search error correctly', async () => {
-    vi.spyOn(api, 'fetchPokemonList').mockRejectedValueOnce(new Error('Fetch failed'));
+    (useGetPokemonListFullQuery as unknown as Mock).mockReturnValue({
+      data: [],
+      isLoading: false,
+      isFetching: false,
+      error: { status: 500, data: 'Server Error' },
+      refetch: vi.fn(),
+    });
 
     renderThemeProvider(
       <Routes>
