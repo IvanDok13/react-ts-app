@@ -1,7 +1,5 @@
-import { fetchPokemonFull } from '@apis/api';
 import { LoadingIndicator } from '@components/loader/loading-indicator';
-import type { PokemonFull } from '@interfaces/interface';
-import { useEffect, useState } from 'react';
+import { useGetPokemonFullQuery } from '@store/pokeApi';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export function Details() {
@@ -12,27 +10,17 @@ export function Details() {
     navigate(`/${page}`);
   };
 
-  const [pokemon, setPokemon] = useState<PokemonFull | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    data: pokemon,
+    isLoading,
+    error,
+  } = useGetPokemonFullQuery(id ?? '', {
+    skip: !id,
+  });
 
-  useEffect(() => {
-    if (!id) return;
-
-    setLoading(true);
-    fetchPokemonFull(id)
-      .then(data => {
-        setPokemon(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError(err instanceof Error ? err.message : 'Unknown error');
-        setLoading(false);
-      });
-  }, [id]);
-
-  if (loading) return <LoadingIndicator />;
-  if (error) return <p>Error: {error}</p>;
+  if (!id) return null;
+  if (isLoading) return <LoadingIndicator />;
+  if (error) return <p>Error: Failed to load details</p>;
   if (!pokemon) return <p>Pokemon run away</p>;
 
   return (
