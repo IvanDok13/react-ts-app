@@ -21,13 +21,12 @@ export default defineConfig({
     sourcemap: true,
   },
   plugins: [tsconfigPaths()],
-  base: '/',
+  base: '/react-ts-app/',
   resolve: {
     alias: {
       '@components': path.resolve(__dirname, './src/components'),
       '@const': path.resolve(__dirname, './src/consts'),
       '@interfaces': path.resolve(__dirname, './src/interfaces'),
-      '@apis': path.resolve(__dirname, './src/apis'),
       '@pages': path.resolve(__dirname, './src/pages'),
       '@router': path.resolve(__dirname, './src/routers'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
