@@ -2,3 +2,4 @@ node_modules/
 dist/
 build/
 vite.config.ts
+next.config.ts
