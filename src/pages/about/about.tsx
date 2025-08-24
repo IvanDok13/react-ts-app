@@ -1,10 +1,17 @@
+import Image from 'next/image';
 import styles from './about.module.css';
 
 export default function About() {
   return (
     <div className={styles.cardContainer}>
       <div>
-        <img className="img" src="https://avatars.githubusercontent.com/u/113414074?v=4" alt="Logo" />
+        <Image
+          width={256}
+          height={256}
+          className="img"
+          src="https://avatars.githubusercontent.com/u/113414074?v=4"
+          alt="Logo"
+        />
       </div>
       <div className={styles.textContainer}>
         <a href="https://github.com/IvanDok13" rel="noreferrer" data-testid="github-link">
@@ -24,8 +31,9 @@ export default function About() {
         <div className="logo">
           <a href="https://rs.school/" rel="noreferrer" target="_blank" data-testid="rss-github-link">
             RS School
-            <img
-              className={styles.rssImg}
+            <Image
+              width={50}
+              height={50}
               src="https://avatars.githubusercontent.com/u/11501370?s=200&v=4"
               alt="RSS logo"
             />
