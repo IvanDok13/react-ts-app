@@ -1,0 +1,259 @@
+@import './normalize.css';
+@import './reset.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  font-size: 100%;
+  color: #2c3e50;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  height: 100%;
+}
+
+body {
+  position: relative;
+  background: rgb(246 241 231);
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  color: var(--color-font-dark);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 10px;
+  align-items: center;
+}
+
+header,
+main,
+footer {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  padding: 5px;
+}
+
+.header {
+  flex: 0 0 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+header,
+footer {
+  background: rgb(171 39 39 / 36%);
+}
+
+.show-password {
+  position: absolute;
+  right: 20px;
+  top: 27px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#tooltip,
+#tooltip-email,
+#tooltip-password {
+  max-width: 350px;
+  font-size: 14px;
+  background-color: hsl(0deg 91% 64%);
+  position: absolute;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.button,
+.errorButton,
+.error-boundary {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #2a0f0f;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #f44336;
+  background-image: linear-gradient(to bottom, #f44336, #e91e63);
+}
+
+.errorButton {
+  background-color: #f00;
+  position: sticky;
+  left: 1110px;
+  bottom: 0px;
+  display: flex;
+  width: 70px;
+  z-index: 10;
+}
+
+.pokemon-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pokemon-card {
+  border: 1px solid #333;
+  margin: 8px;
+  padding: 8px;
+  width: 150px;
+  height: 174px;
+  cursor: pointer;
+}
+
+.error-boundary {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+  animation: fade-in 0.5s ease-in-out;
+}
+
+.error-boundary__close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.img {
+  width: 150px;
+  border-radius: 20px;
+  height: auto;
+}
+
+:root[data-theme='light'] {
+  --bg-color: white;
+  --text-color: black;
+}
+
+:root[data-theme='dark'] {
+  --bg-color: #121212;
+  --text-color: white;
+
+  .button {
+    background-image: linear-gradient(to bottom, #435b73, #1565c0);
+  }
+
+  .banner {
+    background: #333;
+  }
+
+  .form {
+    color: #0b0b0b;
+  }
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+
+.pokemon-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: capitalize;
+  justify-content: center;
+}
+
+h2 {
+  text-transform: capitalize;
+}
+
+.home {
+  font-family: Arial, sans-serif;
+  padding: 16px;
+}
+
+.splitLayout {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  height: 100%;
+}
+
+.leftColumn {
+  flex: 1;
+}
+
+.rightColumn {
+  border-left: 1px solid #ccc;
+  padding-left: 16px;
+}
+
+.refetchBtn {
+  padding: 3px;
+  border: #ddd 1px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 70px;
+  justify-content: center;
+  margin: 4px;
+}
