@@ -7,8 +7,10 @@ export function RefetchButton({ term }: { term: string }) {
     dispatch(pokeApi.util.invalidateTags([{ type: 'PokemonList', id: term }, { type: 'Pokemon' }]));
   };
   return (
-    <button type="button" onClick={handleRefresh}>
-      Refetch
-    </button>
+    <div>
+      <button className="refetchBtn" type="button" onClick={handleRefresh}>
+        Refetch
+      </button>
+    </div>
   );
 }
