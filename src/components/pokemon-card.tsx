@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@hooks/UseSelect';
 import { PokemonFull } from '@interfaces/interface';
 import { toggleSelected } from '@store/selectedPokemon';
+import Image from 'next/image';
 
 interface Props {
   pokemon: PokemonFull;
@@ -34,7 +35,9 @@ export function PokemonCard({ pokemon, onClick = () => {} }: Props) {
         />
         <h4>{pokemon.name}</h4>
       </label>
-      {pokemon.sprites.front_default && <img src={pokemon.sprites.front_default} alt={pokemon.name} />}
+      {pokemon.sprites.front_default && (
+        <Image width={100} height={100} src={pokemon.sprites.front_default} alt={pokemon.name} />
+      )}
       <p>Type: {pokemon.types?.map(t => t.type.name).join(', ') || 'Unknown'}</p>
     </button>
   );
