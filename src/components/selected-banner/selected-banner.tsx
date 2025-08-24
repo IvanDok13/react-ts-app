@@ -45,7 +45,7 @@ export function SelectedBanner() {
   return (
     <div className={styles.banner}>
       <p>{selectedList.length} Pokémon selected</p>
-      <button type="button" onClick={handleClear} className={styles.clearBtn}>
+      <button className={styles.clearBtn} type="button" onClick={handleClear}>
         Unselect all
       </button>
       <button type="button" onClick={handleDownload} className={styles.downloadBtn}>
