@@ -5,3 +5,7 @@ export const PAGE_BACK = -1;
 export const THEME_KEY = 'theme';
 export const DEFAULT_DELTA = 2;
 export const OFFSET_MAX = 1000;
+export const AppLocales = {
+  EN: 'en',
+  RU: 'ru',
+};
