@@ -2,6 +2,7 @@
 
 import { LoadingIndicator } from '@components/loader/loading-indicator';
 import { useGetPokemonFullQuery } from '@store/pokeApi';
+import Image from 'next/image';
 
 interface DetailsPanelProps {
   id: string;
@@ -28,7 +29,7 @@ export function DetailsPanel({ id, currentPage = 0, onClose }: DetailsPanelProps
         Close
       </button>
       <h2>{pokemon.name}</h2>
-      <img src={pokemon.sprites.front_default ?? ''} alt={pokemon.name} />
+      <Image width={150} height={150} src={pokemon.sprites.front_default ?? ''} alt={pokemon.name} />
       <p>Type: {pokemon.types?.map(t => t.type.name).join(', ') || 'Unknown'}</p>
       <p>Abilities: {pokemon.abilities?.map(a => a.ability.name).join(', ') || 'None'}</p>
       <p>Height: {pokemon.height}</p>
