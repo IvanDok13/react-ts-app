@@ -1,21 +1,36 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "typeRoots": ["node_modules/@types", "node_modules/@reduxjs/toolkit/types"],
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules/@reduxjs/toolkit/types"
+    ],
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2023",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "skipLibCheck": true,
     "sourceMap": true,
-
+    /* NextJs options */
+    "esModuleInterop": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-
+    "jsx": "preserve",
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -24,21 +39,42 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": false,
-
     /* Paths */
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@styles/*": ["src/styles/*"],
-      "@utils/*": ["src/utils/*"],
-      "@const/*": ["src/consts/*"],
-      "@interfaces/*": ["src/interfaces/*"],
-      "@pages/*": ["src/pages/*"],
-      "@router/*": ["src/routers/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@context/*": ["src/context/*"],
-      "@types/*": ["src/types/*"],
-      "@store/*": ["src/store/*"]
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@const/*": [
+        "src/consts/*"
+      ],
+      "@interfaces/*": [
+        "src/interfaces/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@router/*": [
+        "src/routers/*"
+      ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ],
+      "@context/*": [
+        "src/context/*"
+      ],
+      "@types/*": [
+        "src/types/*"
+      ],
+      "@store/*": [
+        "src/store/*"
+      ]
     }
   },
   "include": [
@@ -48,6 +84,13 @@
     "./dts-bundle-generator.config.ts",
     "ct-config.ts",
     "src/**/*",
-    "commitlint.config.js"
+    "./src",
+    "commitlint.config.js",
+    "./dist/types/**/*.ts",
+    "./next-env.d.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "./node_modules"
   ]
 }

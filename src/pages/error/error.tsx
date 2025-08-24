@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './error.module.css';
 
-export function ErrorPage(): ReactNode {
+export function Error(): ReactNode {
   const navigate = useNavigate();
   return (
     <div className={styles.notFound}>

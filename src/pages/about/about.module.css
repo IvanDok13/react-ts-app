@@ -6,16 +6,19 @@
   cursor: pointer;
 }
 
-.card-container {
+.cardContainer {
   display: flex;
+  flex: 1;
   flex-direction: row;
   justify-content: center;
   margin-bottom: 30px;
+  gap: 20px;
 }
 
-.text-container {
+.textContainer {
   display: flex;
+  flex: 1;
   flex-direction: column;
   width: 70%;
-  padding: 50px;
+  padding: 5px;
 }

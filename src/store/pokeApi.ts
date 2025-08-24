@@ -1,6 +1,6 @@
 import type { Pokemon, PokemonFull, PokemonListResponse } from '@interfaces/interface';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { API, LIMIT_POKEMON } from 'src/consts/const';
+import { API, LIMIT_POKEMON, OFFSET_MAX } from 'src/consts/const';
 
 export const pokeApi = createApi({
   reducerPath: 'pokeApi',
@@ -10,7 +10,7 @@ export const pokeApi = createApi({
     getPokemonList: builder.query<Pokemon[], { term: string } | void>({
       query: args => {
         const term = args?.term?.trim() ?? '';
-        const offset = term ? 0 : Math.floor(Math.random() * 1000);
+        const offset = term ? 0 : Math.floor(Math.random() * OFFSET_MAX);
         return `?limit=${LIMIT_POKEMON}&offset=${offset}`;
       },
       transformResponse: (resp: PokemonListResponse, _meta, args) => {
@@ -28,7 +28,7 @@ export const pokeApi = createApi({
     getPokemonListFull: builder.query<PokemonFull[], { term: string } | void>({
       async queryFn(arg, _api, _extraOptions, baseQuery) {
         const term = arg?.term?.trim() ?? '';
-        const offset = term ? 0 : Math.floor(Math.random() * 1000);
+        const offset = term ? 0 : Math.floor(Math.random() * OFFSET_MAX);
 
         const listResp = await baseQuery(`?limit=${LIMIT_POKEMON}&offset=${offset}`);
         if (listResp.error) return { error: listResp.error };
