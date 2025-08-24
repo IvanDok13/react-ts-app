@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-.footer-wrapper {
+.footerWrapper {
   display: flex;
   width: 100%;
   padding: 10px 20px;
@@ -11,25 +11,25 @@
   backdrop-filter: blur(12.5px);
 }
 
-.footer-copyright {
+.footerCopyright {
   display: flex;
 }
 
-.footer-github-link {
+.footerGithubLink {
   display: flex;
   align-items: center;
   text-decoration: none;
 }
 
-.footer-info {
+.footerInfo {
   display: flex;
   align-items: center;
 }
 
-.footer-github {
+.footerGithub {
   display: block;
   width: 25px;
   height: 25px;
-  background: no-repeat center url('public/svg/rsslogo.svg');
+  background: no-repeat center url('https://avatars.githubusercontent.com/u/11501370?s=200&v=4');
   background-size: contain;
 }
