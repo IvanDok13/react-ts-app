@@ -1,0 +1,43 @@
+.notFound,
+.notFoundText,
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  color: rgb(0 0 0);
+  font-weight: bold;
+}
+
+.notFound {
+  width: 100vw;
+  height: 100vh;
+  background: no-repeat center/50% url('https://www.svgwaves.io/cutfiles/pokemon-31.svg');
+}
+
+.notFoundText {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.buttons {
+  flex-direction: row;
+  gap: 10px;
+}
+
+.backButton,
+.homeButton,
+.notFoundText {
+  background-color: rgb(221 61 37 / 92.5%);
+  border: 2px solid rgb(255 98 0);
+}
+
+.backButton,
+.homeButton {
+  display: flex;
+  text-decoration: none;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
