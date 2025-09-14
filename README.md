@@ -1,3 +1,3 @@
-# starwars-app
+# Pokemon-app
 
-Here my React app with React, TS
+Here my React, Redux, TS, Next.js Pokemon Finder app with API
